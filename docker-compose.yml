@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+
+  api:
+    image: theinfinitytimes/theinfinitytimes-api
+    networks:
+      - theinfinitytimes
+    ports:
+      - 3001:3001
+    environment:
+      IP: 0.0.0.0
+
+  frontend:
+    image: theinfinitytimes/theinfinitytimes
+    ports:
+      - 8080:8080
+    networks:
+      - theinfinitytimes
+    environment:
+      IP: 0.0.0.0
+  
+  mongo:
+    image: mongo
+    networks:
+      - theinfinitytimes
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: pass
+      MONGO_INITDB_DATABASE: theinfinitytimes
+      IP: 0.0.0.0
+
+networks:
+  theinfinitytimes:
